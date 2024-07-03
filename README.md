@@ -1,25 +1,5 @@
 # Amaral
 
-## Table of Contents
-- [Introduction](#introduction)
-- [Architecture](#architecture)
-- [Features](#features)
-  - [Repository Pattern and UnitOfWork](#repository-pattern-and-unitofwork)
-  - [TempData/ViewBag/ViewData](#tempdata-viewbag-viewdata)
-  - [SweetAlerts, Rich Text Editor, and DataTables](#sweetalerts-rich-text-editor-and-datatables)
-  - [Roles and Authorization](#roles-and-authorization)
-  - [Stripe Payment/Refund](#stripe-paymentrefund)
-  - [Session Management](#session-management)
-  - [Emails with SendGrid](#emails-with-sendgrid)
-  - [User Management](#user-management)
-  - [Social Login using Facebook](#social-login-using-facebook)
-  - [View Components](#view-components)
-- [Database Initialization](#database-initialization)
-- [Deployment](#deployment)
-- [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## Introduction
 This project is a .NET Core web application following an N-Tier architecture. It employs the Repository pattern and UnitOfWork for data access, includes various features like session management, user roles and authorization, and integrates several third-party libraries and services for enhanced functionality.
 

@@ -7,8 +7,8 @@ namespace AmaralWeb.Controllers
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext  db) 
-        { 
+        public CategoryController(ApplicationDbContext db)
+        {
             _db = db;
         }
         public IActionResult Index()
@@ -66,10 +66,27 @@ namespace AmaralWeb.Controllers
             return View();
         }
 
-        [HttpPost]
         public IActionResult Delete(int? id)
         {
-            Category? obj = _db.Categories.Find(id);
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            Category? categoryFromDb = _db.Categories.Find(id);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(categoryFromDb);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePOST(int? id)
+        {
+            Category obj = _db.Categories.Find(id);
             if (obj == null)
             {
                 return NotFound();
@@ -77,8 +94,8 @@ namespace AmaralWeb.Controllers
             _db.Categories.Remove(obj);
             _db.SaveChanges();
             TempData["success"] = "Category deleted successfully";
-
             return RedirectToAction("Index");
         }
     }
 }
+
