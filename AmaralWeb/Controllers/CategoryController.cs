@@ -1,5 +1,5 @@
-﻿using AmaralWeb.Data;
-using AmaralWeb.Models;
+﻿using Amaral.DataAccess.Data;
+using Amaral.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmaralWeb.Controllers

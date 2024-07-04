@@ -1,4 +1,4 @@
-namespace AmaralWeb.Models
+namespace Amaral.Models
 {
     public class ErrorViewModel
     {

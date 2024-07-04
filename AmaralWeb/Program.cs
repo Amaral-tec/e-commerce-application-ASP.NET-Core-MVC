@@ -1,4 +1,4 @@
-using AmaralWeb.Data;
+using Amaral.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

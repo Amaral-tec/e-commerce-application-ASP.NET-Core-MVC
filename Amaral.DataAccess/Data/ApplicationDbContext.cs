@@ -1,8 +1,7 @@
-﻿using AmaralWeb.Models;
+﻿using Amaral.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
-namespace AmaralWeb.Data
+namespace Amaral.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {

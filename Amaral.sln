@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34526.213
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmaralWeb", "AmaralWeb\AmaralWeb.csproj", "{AAEACFD0-61EB-435B-A0AF-3EF2DA4119BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmaralWeb", "AmaralWeb\AmaralWeb.csproj", "{AAEACFD0-61EB-435B-A0AF-3EF2DA4119BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amaral.DataAccess", "Amaral.DataAccess\Amaral.DataAccess.csproj", "{1C16C37D-05D0-468E-BF93-25A2B682F388}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amaral.Models", "Amaral.Models\Amaral.Models.csproj", "{7530F3F5-6AB6-48CF-AC28-F0E7DD474F22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amaral.Utility", "Amaral.Utility\Amaral.Utility.csproj", "{E23FFFD1-D244-4482-AF8F-E6F3087B86A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{AAEACFD0-61EB-435B-A0AF-3EF2DA4119BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAEACFD0-61EB-435B-A0AF-3EF2DA4119BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAEACFD0-61EB-435B-A0AF-3EF2DA4119BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C16C37D-05D0-468E-BF93-25A2B682F388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C16C37D-05D0-468E-BF93-25A2B682F388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C16C37D-05D0-468E-BF93-25A2B682F388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C16C37D-05D0-468E-BF93-25A2B682F388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7530F3F5-6AB6-48CF-AC28-F0E7DD474F22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7530F3F5-6AB6-48CF-AC28-F0E7DD474F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7530F3F5-6AB6-48CF-AC28-F0E7DD474F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7530F3F5-6AB6-48CF-AC28-F0E7DD474F22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E23FFFD1-D244-4482-AF8F-E6F3087B86A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E23FFFD1-D244-4482-AF8F-E6F3087B86A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E23FFFD1-D244-4482-AF8F-E6F3087B86A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E23FFFD1-D244-4482-AF8F-E6F3087B86A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
