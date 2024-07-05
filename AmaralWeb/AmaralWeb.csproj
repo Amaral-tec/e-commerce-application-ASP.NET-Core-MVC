@@ -12,6 +12,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
   </ItemGroup>
 
@@ -19,6 +20,10 @@
     <ProjectReference Include="..\Amaral.DataAccess\Amaral.DataAccess.csproj" />
     <ProjectReference Include="..\Amaral.Models\Amaral.Models.csproj" />
     <ProjectReference Include="..\Amaral.Utility\Amaral.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

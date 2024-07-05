@@ -2,8 +2,9 @@
 using Amaral.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AmaralWeb.Controllers
+namespace AmaralWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -43,7 +44,7 @@ namespace AmaralWeb.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _unitOfWork.Category.Get(u=> u.Id == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
             if (categoryFromDb == null)
             {
                 return NotFound();
