@@ -2,6 +2,7 @@
 using Amaral.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Amaral.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240707215536_addForeignKeyForCategoryProductRelation")]
+    partial class addForeignKeyForCategoryProductRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,10 +133,6 @@ namespace Amaral.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<double>("ListPrice")
                         .HasColumnType("double precision");
 
@@ -165,7 +164,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 5,
                             Description = "Elara, a young warrior, must uncover her past and fight ancient darkness. In a world of myths and magic, she forges alliances to restore balance and save her realm.",
                             ISBN = "SWD9999001",
-                            ImageUrl = "",
                             ListPrice = 99.0,
                             Price = 90.0,
                             Price100 = 80.0,
@@ -179,7 +177,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 6,
                             Description = "When a reclusive artist becomes the sole witness to a murder, she must navigate a web of secrets and lies. As danger closes in, she discovers her art holds the key to unmasking the killer.",
                             ISBN = "CAW777777701",
-                            ImageUrl = "",
                             ListPrice = 40.0,
                             Price = 30.0,
                             Price100 = 20.0,
@@ -193,7 +190,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 6,
                             Description = "Haunted by eerie whispers, a troubled woman returns to her childhood home. As she uncovers buried secrets, she must confront her darkest fears to escape a malevolent force from her past.",
                             ISBN = "RITO5555501",
-                            ImageUrl = "",
                             ListPrice = 55.0,
                             Price = 50.0,
                             Price100 = 35.0,
@@ -207,7 +203,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 8,
                             Description = "In the aftermath of war, a historian uncovers letters that reveal a forgotten love story. As she delves deeper, she finds parallels to her own life and must reconcile the past with the present.",
                             ISBN = "WS3333333301",
-                            ImageUrl = "",
                             ListPrice = 70.0,
                             Price = 65.0,
                             Price100 = 55.0,
@@ -221,7 +216,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 3,
                             Description = "Unlock your full potential with Creativity. This inspiring guide explores innovative techniques, exercises, and insights from successful creatives to help you ignite your imagination and transform your ideas into reality.",
                             ISBN = "JU458558999",
-                            ImageUrl = "",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price100 = 20.0,
@@ -235,7 +229,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 4,
                             Description = "Join Liora, a young mage, on an epic quest to balance darkness and light in her war-torn realm. Facing mythical beasts and powerful sorcery, she discovers the true strength of her spirit and the magic within.",
                             ISBN = "FOT000000001",
-                            ImageUrl = "",
                             ListPrice = 25.0,
                             Price = 23.0,
                             Price100 = 20.0,
@@ -249,7 +242,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 8,
                             Description = "When a renowned journalist returns to her hometown, she uncovers long-buried emotions and a lost love. As she navigates past and present, she must decide if she’s willing to risk everything for a second chance at happiness.",
                             ISBN = "YOT000000968",
-                            ImageUrl = "",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price100 = 20.0,
@@ -263,7 +255,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 2,
                             Description = "A daring astronaut leads a team on a groundbreaking mission to an uncharted planet. Facing alien landscapes and unknown dangers, they must rely on their wits and each other to survive and uncover the planet's secrets.",
                             ISBN = "ZA0000003336",
-                            ImageUrl = "",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price100 = 20.0,
@@ -277,7 +268,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 6,
                             Description = "A woman suffering from amnesia pieces together her past after finding a series of cryptic journal entries. As she unravels the mystery, she discovers a shocking truth that could change her life forever.",
                             ISBN = "KL1111225879",
-                            ImageUrl = "",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price100 = 20.0,
@@ -291,7 +281,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 5,
                             Description = "In a realm torn by war, a young warrior inherits a legacy of valor and betrayal. As she seeks redemption for her fallen kingdom, she must navigate treacherous alliances and unearth ancient secrets to restore peace and honor to her people.",
                             ISBN = "PO0006792444",
-                            ImageUrl = "",
                             ListPrice = 70.0,
                             Price = 65.0,
                             Price100 = 55.0,
@@ -305,7 +294,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 5,
                             Description = "In a realm where magic is outlawed, a young sorcerer uncovers an ancient prophecy that could change the course of history. Pursued by dark forces, he must unravel the hidden truth to save his world from imminent destruction.",
                             ISBN = "WW9930000004",
-                            ImageUrl = "",
                             ListPrice = 70.0,
                             Price = 65.0,
                             Price100 = 55.0,
@@ -319,7 +307,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 2,
                             Description = "In a dystopian future, humanity faces extinction due to a mysterious plague. A scientist discovers a controversial method to regenerate human tissue, but as the experiments progress, ethical dilemmas and unforeseen consequences threaten to unravel the fabric of society",
                             ISBN = "EOU330698744",
-                            ImageUrl = "",
                             ListPrice = 25.0,
                             Price = 23.0,
                             Price100 = 20.0,
@@ -333,7 +320,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 9,
                             Description = "Harmony Publishers chronicles the remarkable journey of one of the publishing industry's most influential houses. From its humble beginnings in a small office to becoming a powerhouse in literature, Harmony Publishers has consistently championed innovation, quality, and diversity in its catalog.",
                             ISBN = "AAD555878800",
-                            ImageUrl = "",
                             ListPrice = 55.0,
                             Price = 50.0,
                             Price100 = 35.0,
@@ -347,7 +333,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 8,
                             Description = "In the twilight of the Middle Ages, a noblewoman finds herself betrothed to a mysterious knight tasked with defending the kingdom's last frontier. As they navigate courtly intrigue and battlefield dangers, their initial mistrust turns to reluctant admiration and, eventually, forbidden love amidst the turmoil of war and honor.",
                             ISBN = "UUT000000997",
-                            ImageUrl = "",
                             ListPrice = 25.0,
                             Price = 23.0,
                             Price100 = 20.0,
@@ -361,7 +346,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 4,
                             Description = "In a realm where ancient dragons threaten the balance of power, a young guardian must rise to protect her people. With a mystical artifact as her only weapon, she embarks on a quest fraught with peril and betrayal. Alongside unlikely allies, she discovers her true destiny as the savior of her world.",
                             ISBN = "KAA007778958",
-                            ImageUrl = "",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price100 = 20.0,
@@ -375,7 +359,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 4,
                             Description = "Amidst rising darkness, the guardian faces a new quest to uncover the lost secrets of an ancient prophecy. With allies old and new, she must navigate treacherous landscapes and confront formidable foes to safeguard her realm from impending doom.",
                             ISBN = "AC0002378377",
-                            ImageUrl = "",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price100 = 20.0,
@@ -389,7 +372,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 6,
                             Description = "In the competitive world of high-stakes corporate espionage, a brilliant hacker finds herself at the center of a dangerous game. As she uncovers a web of deceit and betrayal reaching the highest echelons of power, she must race against time to expose the truth and evade capture by ruthless adversaries.",
                             ISBN = "OOU000589600",
-                            ImageUrl = "",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price100 = 20.0,
@@ -403,7 +385,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 2,
                             Description = "In a bustling city, three young teachers embark on their careers, each facing unique challenges in the modern educational landscape. As they navigate classroom dynamics, bureaucratic hurdles, and personal growth, their passion for teaching and dedication to their students are put to the ultimate test.",
                             ISBN = "PPI500000014",
-                            ImageUrl = "",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price100 = 20.0,
@@ -417,7 +398,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 3,
                             Description = "Creative Business Your Own offers practical insights and strategies for aspiring entrepreneurs looking to launch and grow their own creative ventures. From crafting a unique brand identity to navigating digital marketing and fostering innovation, this guide equips readers with essential tools and inspiration to succeed in the competitive world of creative business",
                             ISBN = "LWS000069889",
-                            ImageUrl = "",
                             ListPrice = 55.0,
                             Price = 50.0,
                             Price100 = 35.0,
@@ -431,7 +411,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 10,
                             Description = "In a quaint seaside town, a charming mechanic known as The Bike Guy captures the heart of a free-spirited artist who has sworn off love. As they collaborate on restoring a classic motorcycle, sparks fly, revealing layers of vulnerability and passion beneath their initial friction. Together, they navigate past wounds and unexpected challenges, discovering that true love can be found where you least expect it.",
                             ISBN = "TTA000366947",
-                            ImageUrl = "",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price100 = 20.0,
@@ -445,7 +424,6 @@ namespace Amaral.DataAccess.Migrations
                             CategoryId = 10,
                             Description = "In a world where appearances are everything, a hapless photographer accidentally captures a series of hilarious celebrity mishaps on film. As the photos go viral, chaos ensues as everyone involved tries to save face and navigate the absurdities of fame, revealing that what looks good on paparazzi photos isn't always what it seems.",
                             ISBN = "PPP000069000",
-                            ImageUrl = "",
                             ListPrice = 55.0,
                             Price = 50.0,
                             Price100 = 35.0,
