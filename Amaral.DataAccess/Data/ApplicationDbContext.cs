@@ -186,7 +186,7 @@ namespace Amaral.DataAccess.Data
                 new Product
                 {
                     Id = 12,
-                    Title = "Flesh Start",
+                    Title = "Fresh Start",
                     Author = "Stephanie Walker",
                     Description = "In a dystopian future, humanity faces extinction due to a mysterious plague. A scientist discovers a controversial method to regenerate human tissue, but as the experiments progress, ethical dilemmas and unforeseen consequences threaten to unravel the fabric of society",
                     ISBN = "EOU330698744",
