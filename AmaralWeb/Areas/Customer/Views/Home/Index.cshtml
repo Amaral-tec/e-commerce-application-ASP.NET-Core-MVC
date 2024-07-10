@@ -1,8 +1,63 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<Product>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row pb-3">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-3 col-sm-6 mb-3">
+            <div class="card h-100 border-0 shadow-sm rounded-3">
+                @if (product.ImageUrl != null && product.ImageUrl.Count() > 0)
+                {
+                    <img src="@product.ImageUrl" class="card-img-top rounded-3" />
+                }
+                else
+                {
+                    <img src="https://placehold.co/500x600/png" class="card-img-top rounded-3" />
+                }
+                <div class="card-body text-center">
+                    <h5 class="card-title text-dark opacity-75 text-uppercase">@product.Title</h5>
+                    <p class="card-text text-warning">by <b>@product.Author</b></p>
+                    <p class="text-muted mb-1">
+                        List Price:
+                        <span class="text-decoration-line-through">
+                            @product.ListPrice.ToString("c")
+                        </span>
+                    </p>
+                    <p class="text-dark">
+                        As low as:
+                        <span>
+                            @product.Price100.ToString("c")
+                        </span>
+                    </p>
+                    <a asp-action="Details" asp-route-productId="@product.Id" class="btn btn-primary bg-gradient border-0 w-100">
+                        Details
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="container py-5">
+    <div class="row text-center">
+        <div class="col-md-4 col-sm-12 mb-4">
+            <div class="p-4 bg-light rounded shadow-sm">
+                <i class="bi bi-book-half display-4 mb-3 text-primary"></i>
+                <p>We donate a book for every purchase on our site</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12 mb-4">
+            <div class="p-4 bg-light rounded shadow-sm">
+                <i class="bi bi-gift-fill display-4 mb-3 text-primary"></i>
+                <p>Over 100k books donated to schools worldwide</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12 mb-4">
+            <div class="p-4 bg-light rounded shadow-sm">
+                <i class="bi bi-recycle display-4 mb-3 text-primary"></i>
+                <p>Over 3 million books saved from landfills</p>
+            </div>
+        </div>
+    </div>
 </div>
