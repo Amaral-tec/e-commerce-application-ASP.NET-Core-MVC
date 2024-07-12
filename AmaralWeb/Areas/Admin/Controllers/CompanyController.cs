@@ -8,18 +8,18 @@ namespace AmaralWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = SD.ROLE_ADMIN)]
-    public class CategoryController : Controller
+    public class CompanyController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CategoryController(IUnitOfWork unitOfWork)
+        public CompanyController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
+            List<Company> objCompanyList = _unitOfWork.Company.GetAll().ToList();
 
-            return View(objCategoryList);
+            return View(objCompanyList);
         }
 
         public IActionResult Upsert(int? id)
@@ -27,37 +27,37 @@ namespace AmaralWeb.Areas.Admin.Controllers
 
             if (id == null || id == 0)
             {
-                return View(new Category());
+                return View(new Company());
             }
             else
             {
-                Category categoryObj = _unitOfWork.Category.Get(u => u.Id == id);
-                return View(categoryObj);
+                Company companyObj = _unitOfWork.Company.Get(u => u.Id == id);
+                return View(companyObj);
             }
 
         }
         [HttpPost]
-        public IActionResult Upsert(Category categoryObj)
+        public IActionResult Upsert(Company companyObj)
         {
             if (ModelState.IsValid)
             {
 
-                if (categoryObj.Id == 0)
+                if (companyObj.Id == 0)
                 {
-                    _unitOfWork.Category.Add(categoryObj);
+                    _unitOfWork.Company.Add(companyObj);
                 }
                 else
                 {
-                    _unitOfWork.Category.Update(categoryObj);
+                    _unitOfWork.Company.Update(companyObj);
                 }
 
                 _unitOfWork.Save();
-                TempData["success"] = "Category created successfully";
+                TempData["success"] = "Company created successfully";
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(categoryObj);
+                return View(companyObj);
             }
         }
 
@@ -67,20 +67,20 @@ namespace AmaralWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
-            return Json(new { data = objCategoryList });
+            List<Company> objCompanyList = _unitOfWork.Company.GetAll().ToList();
+            return Json(new { data = objCompanyList });
         }
 
         [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            var categoryToBeDeleted = _unitOfWork.Category.Get(u => u.Id == id);
-            if (categoryToBeDeleted == null)
+            var companyToBeDeleted = _unitOfWork.Company.Get(u => u.Id == id);
+            if (companyToBeDeleted == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });
             }
 
-            _unitOfWork.Category.Remove(categoryToBeDeleted);
+            _unitOfWork.Company.Remove(companyToBeDeleted);
             _unitOfWork.Save();
 
             return Json(new { success = true, message = "Delete Successful" });

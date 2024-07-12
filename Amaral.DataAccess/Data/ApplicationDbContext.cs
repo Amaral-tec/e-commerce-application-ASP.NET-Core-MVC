@@ -14,6 +14,8 @@ namespace Amaral.DataAccess.Data
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,6 +34,89 @@ namespace Amaral.DataAccess.Data
                new Category { Id = 9, Name = "Biography", Description = "A detailed description of a person's life." },
                new Category { Id = 10, Name = "Comedy", Description = "Light-hearted stories designed to amuse and entertain." }
                );
+
+            modelBuilder.Entity<Company>().HasData(
+                new Company
+                {
+                    Id = 1,
+                    Name = "Tech Solution",
+                    StreetAddress = "123 N Wacker Dr",
+                    City = "Chicago",
+                    PostalCode = "60606",
+                    State = "IL",
+                    PhoneNumber = "6669990000"
+                },
+                new Company
+                {
+                    Id = 2,
+                    Name = "Vivid Books",
+                    StreetAddress = "10 E 21st St",
+                    City = "New York",
+                    PostalCode = "10010",
+                    State = "NY",
+                    PhoneNumber = "7779990000"
+                },
+                new Company
+                {
+                    Id = 3,
+                    Name = "Readers Club",
+                    StreetAddress = "125 3rd St",
+                    City = "San Francisco",
+                    PostalCode = "94103",
+                    State = "CA",
+                    PhoneNumber = "1113335555"
+                },
+                new Company
+                {
+                    Id = 4,
+                    Name = "Creative Minds",
+                    StreetAddress = "456 S Main St",
+                    City = "Los Angeles",
+                    PostalCode = "90013",
+                    State = "CA",
+                    PhoneNumber = "2225557777"
+                },
+                new Company
+                {
+                    Id = 5,
+                    Name = "HealthPlus",
+                    StreetAddress = "789 Congress Ave",
+                    City = "Austin",
+                    PostalCode = "78701",
+                    State = "TX",
+                    PhoneNumber = "3336668888"
+                },
+                new Company
+                {
+                    Id = 6,
+                    Name = "EduWorld",
+                    StreetAddress = "321 E Kennedy Blvd",
+                    City = "Tampa",
+                    PostalCode = "33602",
+                    State = "FL",
+                    PhoneNumber = "4447779999"
+                },
+                new Company
+                {
+                    Id = 7,
+                    Name = "EcoGreen",
+                    StreetAddress = "654 Dexter Ave N",
+                    City = "Seattle",
+                    PostalCode = "98109",
+                    State = "WA",
+                    PhoneNumber = "5558881111"
+                },
+                new Company
+                {
+                    Id = 8,
+                    Name = "Tech Innovators",
+                    StreetAddress = "987 Walnut St",
+                    City = "Boulder",
+                    PostalCode = "80302",
+                    State = "CO",
+                    PhoneNumber = "6669992222"
+                }
+            );
 
             modelBuilder.Entity<Product>().HasData(
                 new Product

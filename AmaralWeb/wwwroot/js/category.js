@@ -6,20 +6,21 @@ $(document).ready(function () {
 
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
-        "ajax": { url: '/admin/product/getall' },
+        "ajax": { url: '/admin/category/getall' },
         "columns": [
-            { data: 'title', "width": "30%" },
-            { data: 'isbn', "width": "15%" },
-            { data: 'listPrice', "width": "10%" },
-            { data: 'author', "width": "15%" },
-            { data: 'category.name', "width": "10%" },
+            { data: 'name', "width": "30%" },
+            { data: 'description', "width": "50%" },
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="text-end">
-                     <a href="/admin/product/upsert?id=${data}" class="btn btn-primary btn-sm ms-1"> <i class="bi bi-pencil-square"></i> Edit</a>               
-                     <a onClick=Delete('/admin/product/delete/${data}') class="btn btn-danger btn-sm ms-1"> <i class="bi bi-trash-fill"></i> Delete</a>
-                    </div>`
+                        <a href="/admin/category/upsert?id=${data}" class="btn btn-primary btn-sm ms-1">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>               
+                        <a onClick=Delete('/admin/category/delete/${data}') class="btn btn-danger btn-sm ms-1"> 
+                            <i class="bi bi-trash-fill"></i> Delete
+                        </a>
+                    </div>`;
                 },
                 "width": "20%"
             }
