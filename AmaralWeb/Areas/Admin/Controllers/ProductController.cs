@@ -1,12 +1,15 @@
 ﻿using Amaral.DataAccess.Repository.IRepository;
 using Amaral.Models;
 using Amaral.Models.ViewModels;
+using Amaral.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AmaralWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.ROLE_ADMIN)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

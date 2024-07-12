@@ -1,10 +1,13 @@
 ﻿using Amaral.DataAccess.Repository.IRepository;
 using Amaral.Models;
+using Amaral.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmaralWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.ROLE_ADMIN)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
