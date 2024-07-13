@@ -133,12 +133,12 @@ namespace AmaralWeb.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if(!_roleManager.RoleExistsAsync(SD.ROLE_CUSTOMER).GetAwaiter().GetResult())
+            if(!_roleManager.RoleExistsAsync(StaticData.ROLE_CUSTOMER).GetAwaiter().GetResult())
             {
-                _roleManager.CreateAsync(new IdentityRole(SD.ROLE_CUSTOMER)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.ROLE_COMPANY)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.ROLE_ADMIN)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.ROLE_EMPLOYEE)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(StaticData.ROLE_CUSTOMER)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(StaticData.ROLE_COMPANY)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(StaticData.ROLE_ADMIN)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(StaticData.ROLE_EMPLOYEE)).GetAwaiter().GetResult();
             }
 
             Input = new()
@@ -176,7 +176,7 @@ namespace AmaralWeb.Areas.Identity.Pages.Account
                 user.PostalCode = Input.PostalCode;
                 user.PhoneNumber = Input.PhoneNumber;
 
-                if(Input.Role == SD.ROLE_CUSTOMER)
+                if(Input.Role == StaticData.ROLE_CUSTOMER)
                 {
                     user.CompanyId = Input.CompanyId;
                 }
@@ -194,7 +194,7 @@ namespace AmaralWeb.Areas.Identity.Pages.Account
                     } 
                     else
                     {
-                        await _userManager.AddToRoleAsync(user, SD.ROLE_CUSTOMER);
+                        await _userManager.AddToRoleAsync(user, StaticData.ROLE_CUSTOMER);
                     }
 
                     var userId = await _userManager.GetUserIdAsync(user);

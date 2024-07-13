@@ -26,3 +26,16 @@ body {
     background-color: rgba(189, 116, 24, 0.6);
     color: white;
 }
+
+.price-quantity h6 {
+    display: flex;
+    align-items: center;
+}
+
+.price-quantity span {
+    white-space: nowrap;
+}
+
+.btn-group a {
+    margin-right: 0.5rem;
+}

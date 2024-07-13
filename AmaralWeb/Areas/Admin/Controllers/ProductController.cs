@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace AmaralWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.ROLE_ADMIN)]
+    [Authorize(Roles = StaticData.ROLE_ADMIN)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

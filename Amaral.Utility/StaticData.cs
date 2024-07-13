@@ -1,13 +1,11 @@
 ﻿namespace Amaral.Utility
 {
-    public static class SD
+    public static class StaticData
     {
         public const string ROLE_CUSTOMER = "Customer";
         public const string ROLE_COMPANY = "Company";
         public const string ROLE_ADMIN = "Admin";
         public const string ROLE_EMPLOYEE = "Employee";
-
-        public const string SESSION_CART = "Session Shopping Cart";
 
         public const string STATUS_PENDING = "Pending";
         public const string STATUS_APPROVED = "Approved";
@@ -21,5 +19,6 @@
         public const string PAYMENT_STATUS_DELAYED_PAYMENT = "Approved For Delayed Payment";
         public const string PAYMENT_STATUS_REJECTED = "Rejected";
 
-    }
+		public const string SESSION_CART = "Session Shopping Cart";
+	}
 }
