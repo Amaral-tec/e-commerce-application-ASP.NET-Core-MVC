@@ -61,7 +61,7 @@ namespace AmaralWeb.Areas.Admin.Controllers
             switch (status)
             {
                 case "pending":
-                    objOrderHeaders = objOrderHeaders.Where(u => u.PaymentStatus == StaticData.PAYMENT_STATUS_DELAYED_PAYMENT);
+                    objOrderHeaders = objOrderHeaders.Where(u => (u.PaymentStatus == StaticData.PAYMENT_STATUS_DELAYED_PAYMENT) || (u.PaymentStatus == StaticData.PAYMENT_STATUS_PENDING));
                     break;
                 case "inprocess":
                     objOrderHeaders = objOrderHeaders.Where(u => u.OrderStatus == StaticData.STATUS_IN_PROCESS);
