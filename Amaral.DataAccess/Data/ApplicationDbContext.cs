@@ -20,7 +20,34 @@ namespace Amaral.DataAccess.Data
 		public DbSet<OrderHeader> OrderHeaders { get; set; }
 		public DbSet<OrderDetail> OrderDetails { get; set; }
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public override int SaveChanges()
+        {
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                if (entry.Entity != null)
+                {
+                    var entityType = entry.Entity.GetType();
+                    var dateProperties = entityType.GetProperties()
+                        .Where(p => p.PropertyType == typeof(DateTime) || p.PropertyType == typeof(DateTime?));
+
+                    foreach (var property in dateProperties)
+                    {
+                        var dateTime = property.PropertyType == typeof(DateTime?)
+                            ? (DateTime?)property.GetValue(entry.Entity)
+                            : (DateTime)property.GetValue(entry.Entity);
+
+                        if (dateTime.HasValue && dateTime.Value.Kind == DateTimeKind.Local)
+                        {
+                            property.SetValue(entry.Entity, dateTime.Value.ToUniversalTime());
+                        }
+                    }
+                }
+            }
+
+            return base.SaveChanges();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 

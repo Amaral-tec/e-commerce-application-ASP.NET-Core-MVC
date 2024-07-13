@@ -51,17 +51,20 @@ namespace AmaralWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductVM productVM, IFormFile?  file)
+        public IActionResult Upsert(ProductVM productVM, string fileBase64)
         {
             if (ModelState.IsValid)
             {
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
-                if (file != null) 
+                if (!string.IsNullOrEmpty(fileBase64))
                 {
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    // Decode the base64 string
+                    var base64Data = fileBase64.Substring(fileBase64.IndexOf(",") + 1);
+                    var binData = Convert.FromBase64String(base64Data);
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";
                     string productPath = Path.Combine(wwwRootPath, @"images\product");
 
-                    if (!string.IsNullOrEmpty(productVM.Product.ImageUrl)) 
+                    if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
                     {
                         var oldImagePath = Path.Combine(wwwRootPath, productVM.Product.ImageUrl.TrimStart('\\'));
 
@@ -71,9 +74,9 @@ namespace AmaralWeb.Areas.Admin.Controllers
                         }
                     }
 
-                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create)) 
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
                     {
-                        file.CopyTo(fileStream);
+                        fileStream.Write(binData, 0, binData.Length);
                     }
 
                     productVM.Product.ImageUrl = @"\images\product\" + fileName;
@@ -94,6 +97,7 @@ namespace AmaralWeb.Areas.Admin.Controllers
             }
             return View(productVM);
         }
+
 
         #region API CALLS
 
