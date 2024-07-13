@@ -39,3 +39,9 @@ body {
 .btn-group a {
     margin-right: 0.5rem;
 }
+
+@media (max-width: 767px) {
+    .action-text {
+        display: none;
+    }
+}

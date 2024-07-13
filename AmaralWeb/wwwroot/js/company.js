@@ -17,15 +17,16 @@ function loadDataTable() {
             {
                 data: 'id',
                 "render": function (data) {
-                    return `<div class="text-end">
-                     <a href="/admin/company/upsert?id=${data}" class="btn btn-primary btn-sm ms-1"> <i class="bi bi-pencil-square"></i> Edit</a>               
-                     <a onClick=Delete('/admin/company/delete/${data}') class="btn btn-danger btn-sm ms-1"> <i class="bi bi-trash-fill"></i> Delete</a>
+                    return `<div class="text-end text-nowrap">
+                     <a href="/admin/company/upsert?id=${data}" class="btn btn-primary btn-sm ms-1"> <i class="bi bi-pencil-square"></i><span class="action-text"> Edit</span></a>               
+                     <a onClick=Delete('/admin/company/delete/${data}') class="btn btn-danger btn-sm ms-1"> <i class="bi bi-trash-fill"></i><span class="action-text"> Delete</span></a>
                     </div>`
                 },
                 "width": "20%"
             }
         ],
-        "responsive": true
+        "responsive": true,
+        "autoWidth": false
     });
 }
 
