@@ -3,7 +3,6 @@
 @{
     bool authorized = User.IsInRole(StaticData.ROLE_ADMIN) || User.IsInRole(StaticData.ROLE_EMPLOYEE);
 }
-
 <form method="post">
     <input asp-for="OrderHeader.Id" hidden />
     <br />
@@ -36,10 +35,10 @@
                                         <input asp-for="OrderHeader.Name" type="text" class="form-control" />
                                         <span asp-validation-for="OrderHeader.Name" class="text-danger"></span>
                                     }
-                                    else {
+                                    else
+                                    {
                                         <input asp-for="OrderHeader.Name" readonly type="text" class="form-control" />
                                     }
-
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -56,7 +55,8 @@
                                         <input asp-for="OrderHeader.PhoneNumber" type="text" class="form-control" />
                                         <span asp-validation-for="OrderHeader.PhoneNumber" class="text-danger"></span>
                                     }
-                                    else {
+                                    else
+                                    {
                                         <input asp-for="OrderHeader.PhoneNumber" readonly type="text" class="form-control" />
                                     }
                                 </div>
@@ -69,7 +69,8 @@
                                         <input asp-for="OrderHeader.StreetAddress" type="text" class="form-control" />
                                         <span asp-validation-for="OrderHeader.StreetAddress" class="text-danger"></span>
                                     }
-                                    else {
+                                    else
+                                    {
                                         <input asp-for="OrderHeader.StreetAddress" readonly type="text" class="form-control" />
                                     }
                                 </div>
@@ -82,7 +83,8 @@
                                         <input asp-for="OrderHeader.City" type="text" class="form-control" />
                                         <span asp-validation-for="OrderHeader.City" class="text-danger"></span>
                                     }
-                                    else {
+                                    else
+                                    {
                                         <input asp-for="OrderHeader.City" readonly type="text" class="form-control" />
                                     }
                                 </div>
@@ -95,7 +97,8 @@
                                         <input asp-for="OrderHeader.State" type="text" class="form-control" />
                                         <span asp-validation-for="OrderHeader.State" class="text-danger"></span>
                                     }
-                                    else {
+                                    else
+                                    {
                                         <input asp-for="OrderHeader.State" readonly type="text" class="form-control" />
                                     }
                                 </div>
@@ -108,7 +111,8 @@
                                         <input asp-for="OrderHeader.PostalCode" type="text" class="form-control" />
                                         <span asp-validation-for="OrderHeader.PostalCode" class="text-danger"></span>
                                     }
-                                    else {
+                                    else
+                                    {
                                         <input asp-for="OrderHeader.PostalCode" readonly type="text" class="form-control" />
                                     }
                                 </div>
@@ -126,7 +130,8 @@
                                     {
                                         <input asp-for="OrderHeader.Carrier" id="carrier" type="text" class="form-control" />
                                     }
-                                    else {
+                                    else
+                                    {
                                         <input asp-for="OrderHeader.Carrier" readonly type="text" class="form-control" />
                                     }
                                 </div>
@@ -138,7 +143,8 @@
                                     {
                                         <input asp-for="OrderHeader.TrackingNumber" id="trackingNumber" type="text" class="form-control" />
                                     }
-                                    else {
+                                    else
+                                    {
                                         <input asp-for="OrderHeader.TrackingNumber" readonly type="text" class="form-control" />
                                     }
                                 </div>
@@ -174,7 +180,8 @@
                             }
                             <div class="row my-1">
 
-                                @if (Model.OrderHeader.SessionId == null) {
+                                @if (Model.OrderHeader.SessionId == null)
+                                {
                                     <div class="col-3">Payment Due Date</div>
                                     <div class="col-9">
                                         @if (Model.OrderHeader.PaymentDueDate != DateTime.MinValue)
@@ -187,7 +194,8 @@
                                         }
                                     </div>
                                 }
-                                else {
+                                else
+                                {
                                     <div class="col-3">Payment Date</div>
                                     <div class="col-9">
                                         @if (Model.OrderHeader.PaymentDate != DateTime.MinValue)
@@ -200,7 +208,6 @@
                                         }
                                     </div>
                                 }
-
                             </div>
                             <div class="row my-1">
                                 <div class="col-3">Payment Status</div>
@@ -220,7 +227,8 @@
                             <label class="btn btn-outline-primary form-control my-2">Order Status - @Model.OrderHeader.OrderStatus</label>
 
                             <ul class="list-group mb-3">
-                                @foreach (var detail in Model.OrderDetail) {
+                                @foreach (var detail in Model.OrderDetail)
+                                {
                                     <li class="list-group-item d-flex justify-content-between p-2 bg-light">
                                         <div class="row container">
                                             <div class="col-8">
@@ -247,25 +255,27 @@
                             </ul>
 
                             @if (Model.OrderHeader.PaymentStatus == StaticData.PAYMENT_STATUS_DELAYED_PAYMENT &&
-                            Model.OrderHeader.OrderStatus == StaticData.STATUS_SHIPPED) {
+                            Model.OrderHeader.OrderStatus == StaticData.STATUS_SHIPPED)
+                            {
                                 <button type="submit" class="btn btn-success form-control my-1">Pay Now</button>
                             }
                             @if (authorized)
                             {
                                 @if (Model.OrderHeader.OrderStatus == StaticData.STATUS_APPROVED)
                                 {
-                                    <button type="submit" asp-action="StartProcessing"
-                                            class="btn btn-primary form-control my-1">
+                                    <button type="submit" asp-action="StartProcessing" class="btn btn-primary form-control my-1">
                                         Start Processing
                                     </button>
                                 }
-                                @if (Model.OrderHeader.OrderStatus == StaticData.STATUS_IN_PROCESS) {
+                                @if (Model.OrderHeader.OrderStatus == StaticData.STATUS_IN_PROCESS)
+                                {
                                     <button type="submit" asp-action="ShipOrder" onclick="return validateInput()" class="btn btn-primary form-control my-1">Ship Order</button>
                                 }
 
                                 @if (Model.OrderHeader.OrderStatus != StaticData.STATUS_REFUNDED &&
                                Model.OrderHeader.OrderStatus != StaticData.STATUS_CANCELLED &&
-                               Model.OrderHeader.OrderStatus != StaticData.STATUS_SHIPPED) {
+                               Model.OrderHeader.OrderStatus != StaticData.STATUS_SHIPPED)
+                                {
                                     <button asp-action="CancelOrder" type="submit" class="btn btn-danger form-control my-1">Cancel Order</button>
                                 }
                             }
@@ -278,23 +288,23 @@
 </form>
 
 
-@section Scripts{
+@section Scripts {
 
     <partial name="_ValidationScriptsPartial" />
     <script>
-        function validateInput(){
-            if(document.getElementById("trackingNumber").value==""){
+        function validateInput() {
+            if (document.getElementById("trackingNumber").value == "") {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Oops...',
+                    title: 'Validation Error',
                     text: 'Please enter tracking number!',
                 });
                 return false;
             }
-            if (document.getElementById("carrier").value =="") {
+            if (document.getElementById("carrier").value == "") {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Oops...',
+                    title: 'Validation Error',
                     text: 'Please enter carrier!',
                 });
                 return false;
