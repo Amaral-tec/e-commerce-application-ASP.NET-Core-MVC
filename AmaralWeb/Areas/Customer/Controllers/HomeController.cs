@@ -22,7 +22,7 @@ namespace AmaralWeb.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            List<Product> productList = [.. _unitOfWork.Product.GetAll(includeProperties: "Category")];
+            IEnumerable<Product> productList = [.. _unitOfWork.Product.GetAll(includeProperties: "Category")];
 
             return View(productList);
         }
@@ -58,6 +58,9 @@ namespace AmaralWeb.Areas.Customer.Controllers
             {
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
                 _unitOfWork.Save();
+
+                HttpContext.Session.SetInt32(StaticData.SESSION_CART,
+                _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId).Count());
             }
             TempData["success"] = "Cart updated successfully";
 
