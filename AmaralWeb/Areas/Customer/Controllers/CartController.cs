@@ -3,6 +3,7 @@ using Amaral.Models;
 using Amaral.Models.ViewModels;
 using Amaral.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
 using System.Security.Claims;
@@ -14,13 +15,15 @@ namespace AmaralWeb.Areas.Customer.Controllers
     public class CartController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IEmailSender _emailSender;
 
         [BindProperty]
         public ShoppingCartVM ShoppingCartVM { get; set; }
 
-        public CartController(IUnitOfWork unitOfWork)
+        public CartController(IUnitOfWork unitOfWork, IEmailSender emailSender)
         {
             _unitOfWork = unitOfWork;
+            _emailSender = emailSender;
         }
 
         public IActionResult Index()
@@ -184,12 +187,12 @@ namespace AmaralWeb.Areas.Customer.Controllers
                     _unitOfWork.OrderHeader.UpdateStatus(id, StaticData.STATUS_APPROVED, StaticData.PAYMENT_STATUS_APPROVED);
                     _unitOfWork.Save();
                 }
-                
+
                 HttpContext.Session.Clear();
             }
 
-            //_emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email, "New Order - Bulky Book",
-            //	$"<p>New Order Created - {orderHeader.Id}</p>");
+            _emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email, "New Order - Bulky Book",
+                $"<p>New Order Created - {orderHeader.Id}</p>");
 
             List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
                 .GetAll(u => u.ApplicationUserId == orderHeader.ApplicationUserId).ToList();
@@ -253,7 +256,7 @@ namespace AmaralWeb.Areas.Customer.Controllers
             HttpContext.Session.SetInt32(StaticData.SESSION_CART, _unitOfWork.ShoppingCart
                 .GetAll(u => u.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1);
             _unitOfWork.Save();
-            
+
             return RedirectToAction(nameof(Index));
         }
     }
