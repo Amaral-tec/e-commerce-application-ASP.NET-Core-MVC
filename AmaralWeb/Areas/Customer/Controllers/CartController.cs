@@ -132,7 +132,7 @@ namespace AmaralWeb.Areas.Customer.Controllers
             {
                 //https://docs.stripe.com/api/checkout/sessions/create
 
-                var domain = "https://localhost:7243/";
+                var domain = Request.Scheme + "://" + Request.Host.Value + "/";
                 var options = new Stripe.Checkout.SessionCreateOptions
                 {
                     SuccessUrl = domain + $"customer/cart/orderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",
