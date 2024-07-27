@@ -43,6 +43,8 @@
                                     <li class="nav-item"><a class="dropdown-item" asp-area="Admin" asp-controller="Company" asp-action="Index">Company</a></li>
                                     <li class="nav-item"><a class="dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a></li>
                                     <li><hr class="dropdown-divider"></li>
+                                    <li class="nav-item"><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Create User</a></li>
+                                    <li class="nav-item"><a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Index">Manage User</a></li>
                                 </ul>
                             </li>
                         }
@@ -75,6 +77,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js" asp-append-version="true"></script>
     <script src="https://cdn.tiny.cloud/1/jas8zlwyae53u1y0eduou4hhxpkqbu6zmuu7pvsdg9h0rnyn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
