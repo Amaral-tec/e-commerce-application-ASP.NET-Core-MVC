@@ -28,4 +28,8 @@
     <ProjectReference Include="..\Amaral.Utility\Amaral.Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\products\product-6\" />
+  </ItemGroup>
+
 </Project>
