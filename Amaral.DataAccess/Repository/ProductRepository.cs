@@ -28,10 +28,7 @@ namespace Amaral.DataAccess.Repository
                 objFromDb.Price50 = obj.Price50;
                 objFromDb.Price100 = obj.Price100;
                 objFromDb.CategoryId = obj.CategoryId;
-                if (!string.IsNullOrEmpty(obj.ImageUrl))
-                {
-                    objFromDb.ImageUrl = obj.ImageUrl;
-                }
+                objFromDb.ProductImages = obj.ProductImages;
             }
         }
     }

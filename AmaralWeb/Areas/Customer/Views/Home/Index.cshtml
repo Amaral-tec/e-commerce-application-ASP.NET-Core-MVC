@@ -1,39 +1,50 @@
 ﻿@model IEnumerable<Product>
 
+@{
+    var productsWithMinImage = Model
+        .GroupBy(p => p.Id)
+        .Select(g => new
+        {
+            Product = g.First(),
+            MinImage = g.First().ProductImages.OrderBy(img => img.Id).FirstOrDefault()
+        })
+        .OrderBy(p => p.Product.Title);
+}
+
 <div class="banner my-2">
     This website is part of an academic project. All products and content are fictitious and for educational purposes only.
 </div>
 
 <div class="row pb-3">
-    @foreach (var product in Model)
+    @foreach (var item in productsWithMinImage)
     {
         <div class="col-lg-2 col-sm-6 mb-3">
             <div class="card h-100 border-0 shadow-sm rounded-3 d-flex flex-column">
-                @if (product.ImageUrl != null && product.ImageUrl.Count() > 0)
+                @if (item.MinImage != null)
                 {
-                    <img src="@product.ImageUrl" class="card-img-top rounded-3" />
+                    <img src="@item.MinImage.ImageUrl" class="card-img-top rounded-3" />
                 }
                 else
                 {
                     <img src="https://placehold.co/500x600/png" class="card-img-top rounded-3" />
                 }
                 <div class="card-body text-center flex-grow-1">
-                    <h6 class="card-title text-dark opacity-75 text-uppercase">@product.Title</h6>
-                    <p class="card-text text-warning small">by <b>@product.Author</b></p>
+                    <h6 class="card-title text-dark opacity-75 text-uppercase">@item.Product.Title</h6>
+                    <p class="card-text text-warning small">by <b>@item.Product.Author</b></p>
                     <p class="text-muted mb-1">
                         List Price:
                         <span class="text-decoration-line-through">
-                            @product.ListPrice.ToString("c")
+                            @item.Product.ListPrice.ToString("c")
                         </span>
                     </p>
                     <p class="text-dark">
                         As low as:
                         <span>
-                            @product.Price100.ToString("c")
+                            @item.Product.Price100.ToString("c")
                         </span>
                     </p>
                 </div>
-                <a asp-action="Details" asp-route-productId="@product.Id" class="btn btn-primary bg-gradient border-0 w-100 mt-auto">
+                <a asp-action="Details" asp-route-productId="@item.Product.Id" class="btn btn-primary bg-gradient border-0 w-100 mt-auto">
                     Details
                 </a>
             </div>

@@ -44,16 +44,21 @@ namespace AmaralWeb.Areas.Admin.Controllers
                 }),
             };
 
-            RoleVM.ApplicationUser.Role = _userManager.GetRolesAsync(_unitOfWork.ApplicationUser.Get(u => u.Id == userId))
-                    .GetAwaiter().GetResult().FirstOrDefault();
+            RoleVM.ApplicationUser.Role = _userManager
+                .GetRolesAsync(_unitOfWork.ApplicationUser
+                .Get(u => u.Id == userId))
+                .GetAwaiter().GetResult().FirstOrDefault();
+
             return View(RoleVM);
         }
 
         [HttpPost]
         public IActionResult RoleManagment(RoleManagmentVM roleManagmentVM)
         {
-            string oldRole = _userManager.GetRolesAsync(_unitOfWork.ApplicationUser.Get(u => u.Id == roleManagmentVM.ApplicationUser.Id))
-                    .GetAwaiter().GetResult().FirstOrDefault();
+            string oldRole = _userManager.GetRolesAsync(_unitOfWork.ApplicationUser
+                .Get(u => u.Id == roleManagmentVM.ApplicationUser.Id))
+                .GetAwaiter()
+                .GetResult().FirstOrDefault();
 
             ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == roleManagmentVM.ApplicationUser.Id);
 

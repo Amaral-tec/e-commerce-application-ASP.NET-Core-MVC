@@ -21,7 +21,7 @@ namespace AmaralWeb.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Product> objProductList = [.. _unitOfWork.Product.GetAll(includeProperties:"Category")];
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
 
             return View(objProductList);
         }
@@ -35,53 +35,24 @@ namespace AmaralWeb.Areas.Admin.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 }),
-
                 Product = new Product()
             };
-            
             if (id == null || id == 0)
             {
                 return View(productVM);
             }
             else
             {
-                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id, includeProperties: "ProductImages");
                 return View(productVM);
-            }       
+            }
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductVM productVM, string fileBase64)
+        public IActionResult Upsert(ProductVM productVM, List<string> fileBase64, List<string> fileName)
         {
             if (ModelState.IsValid)
             {
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-                if (!string.IsNullOrEmpty(fileBase64))
-                {
-                    // Decode the base64 string
-                    var base64Data = fileBase64.Substring(fileBase64.IndexOf(",") + 1);
-                    var binData = Convert.FromBase64String(base64Data);
-                    string fileName = Guid.NewGuid().ToString() + ".jpg";
-                    string productPath = Path.Combine(wwwRootPath, @"images\product");
-
-                    if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
-                    {
-                        var oldImagePath = Path.Combine(wwwRootPath, productVM.Product.ImageUrl.TrimStart('\\'));
-
-                        if (System.IO.File.Exists(oldImagePath))
-                        {
-                            System.IO.File.Delete(oldImagePath);
-                        }
-                    }
-
-                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
-                    {
-                        fileStream.Write(binData, 0, binData.Length);
-                    }
-
-                    productVM.Product.ImageUrl = @"\images\product\" + fileName;
-                }
-
                 if (productVM.Product.Id == 0)
                 {
                     _unitOfWork.Product.Add(productVM.Product);
@@ -92,20 +63,59 @@ namespace AmaralWeb.Areas.Admin.Controllers
                 }
 
                 _unitOfWork.Save();
-                TempData["success"] = "Product created successfully";
+
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (fileBase64 != null && fileBase64.Count > 0 && fileName != null && fileName.Count > 0)
+                {
+                    string productPath = @"images\products\product-" + productVM.Product.Id;
+                    string finalPath = Path.Combine(wwwRootPath, productPath);
+                    if (!Directory.Exists(finalPath))
+                        Directory.CreateDirectory(finalPath);
+
+                    for (int i = 0; i < fileBase64.Count; i++)
+                    {
+                        byte[] imageBytes = Convert.FromBase64String(fileBase64[i].Split(",")[1]);
+                        string newFileName = Guid.NewGuid().ToString() + Path.GetExtension(fileName[i]);
+                        string filePath = Path.Combine(finalPath, newFileName);
+
+                        System.IO.File.WriteAllBytes(filePath, imageBytes);
+
+                        ProductImage productImage = new()
+                        {
+                            ImageUrl = @"\" + productPath + @"\" + newFileName,
+                            ProductId = productVM.Product.Id,
+                        };
+
+                        if (productVM.Product.ProductImages == null)
+                            productVM.Product.ProductImages = new List<ProductImage>();
+
+                        productVM.Product.ProductImages.Add(productImage);
+                    }
+
+                    _unitOfWork.Product.Update(productVM.Product);
+                    _unitOfWork.Save();
+                }
+
+                TempData["success"] = "Operation Successful";
                 return RedirectToAction("Index");
             }
-            return View(productVM);
+            else
+            {
+                productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
+                return View(productVM);
+            }
         }
-
 
         #region API CALLS
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Product> objProductList = [.. _unitOfWork.Product.GetAll(includeProperties: "Category")];
-
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
             return Json(new { data = objProductList });
         }
 
@@ -132,13 +142,11 @@ namespace AmaralWeb.Areas.Admin.Controllers
                 Directory.Delete(finalPath);
             }
 
-
             _unitOfWork.Product.Remove(productToBeDeleted);
             _unitOfWork.Save();
 
             return Json(new { success = true, message = "Delete Successful" });
         }
-
 
         #endregion
     }
