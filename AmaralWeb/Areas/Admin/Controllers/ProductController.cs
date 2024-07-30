@@ -31,10 +31,10 @@ namespace AmaralWeb.Areas.Admin.Controllers
             ProductVM productVM = new()
             {
                 CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
-                {
-                    Text = u.Name,
-                    Value = u.Id.ToString()
-                }),
+                                {
+                                    Text = u.Name,
+                                    Value = u.Id.ToString()
+                                }),
                 Product = new Product()
             };
             if (id == null || id == 0)
@@ -102,10 +102,10 @@ namespace AmaralWeb.Areas.Admin.Controllers
             else
             {
                 productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
-                {
-                    Text = u.Name,
-                    Value = u.Id.ToString()
-                });
+                                    {
+                                        Text = u.Name,
+                                        Value = u.Id.ToString()
+                                    });
                 return View(productVM);
             }
         }

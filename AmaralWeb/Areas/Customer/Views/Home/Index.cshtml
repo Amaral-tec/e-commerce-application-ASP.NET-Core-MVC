@@ -1,56 +1,93 @@
 ﻿@model IEnumerable<Product>
 
 @{
-    var productsWithMinImage = Model
-        .GroupBy(p => p.Id)
+    var productsByCategory = Model
+        .GroupBy(p => p.Category?.Name)
         .Select(g => new
         {
-            Product = g.First(),
-            MinImage = g.First().ProductImages.OrderBy(img => img.Id).FirstOrDefault()
+            Category = g.Key,
+            Products = g.Select(p => new
+            {
+                Product = p,
+                MinImage = p.ProductImages.OrderBy(img => img.Id).FirstOrDefault()
+            }).OrderBy(p => p.Product.Title)
         })
-        .OrderBy(p => p.Product.Title);
+        .OrderBy(c => c.Category);
 }
 
 <div class="banner my-2">
     This website is part of an academic project. All products and content are fictitious and for educational purposes only.
 </div>
 
-<div class="row pb-3">
-    @foreach (var item in productsWithMinImage)
-    {
-        <div class="col-lg-2 col-sm-6 mb-3">
-            <div class="card h-100 border-0 shadow-sm rounded-3 d-flex flex-column">
-                @if (item.MinImage != null)
-                {
-                    <img src="@item.MinImage.ImageUrl" class="card-img-top rounded-3" />
-                }
-                else
-                {
-                    <img src="https://placehold.co/500x600/png" class="card-img-top rounded-3" />
-                }
-                <div class="card-body text-center flex-grow-1">
-                    <h6 class="card-title text-dark opacity-75 text-uppercase">@item.Product.Title</h6>
-                    <p class="card-text text-warning small">by <b>@item.Product.Author</b></p>
-                    <p class="text-muted mb-1">
-                        List Price:
-                        <span class="text-decoration-line-through">
-                            @item.Product.ListPrice.ToString("c")
-                        </span>
-                    </p>
-                    <p class="text-dark">
-                        As low as:
-                        <span>
-                            @item.Product.Price100.ToString("c")
-                        </span>
-                    </p>
-                </div>
-                <a asp-action="Details" asp-route-productId="@item.Product.Id" class="btn btn-primary bg-gradient border-0 w-100 mt-auto">
-                    Details
-                </a>
-            </div>
+<div id="carouselExampleIndicators" class="carousel slide my-4" data-bs-ride="carousel" data-bs-interval="3000">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/images/banners/banner_01.jpeg" class="d-block w-100" alt="Welcome">
         </div>
-    }
+        <div class="carousel-item">
+            <img src="~/images/banners/banner_02.jpeg" class="d-block w-100" alt="Awesome Big Sale">
+        </div>
+        <div class="carousel-item">
+            <img src="~/images/banners/banner_03.jpeg" class="d-block w-100" alt="Summer Reading Sale">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
+
+@foreach (var categoryGroup in productsByCategory)
+{
+    <div class="category-section my-4">
+        <h2 class="text-primary">@categoryGroup.Category</h2>
+        <div class="row pb-3">
+            @foreach (var item in categoryGroup.Products)
+            {
+                <div class="col-lg-2 col-sm-6 mb-3">
+                    <div class="card h-100 border-0 shadow-sm rounded-3 d-flex flex-column">
+                        @if (item.MinImage != null)
+                        {
+                            <img src="@item.MinImage.ImageUrl" class="card-img-top rounded-3" />
+                        }
+                        else
+                        {
+                            <img src="https://placehold.co/500x600/png" class="card-img-top rounded-3" />
+                        }
+                        <div class="card-body text-center flex-grow-1">
+                            <h6 class="card-title text-dark opacity-75 text-uppercase">@item.Product.Title</h6>
+                            <p class="card-text text-warning small">by <b>@item.Product.Author</b></p>
+                            <p class="text-muted mb-1">
+                                List Price:
+                                <span class="text-decoration-line-through">
+                                    @item.Product.ListPrice.ToString("c")
+                                </span>
+                            </p>
+                            <p class="text-dark">
+                                As low as:
+                                <span>
+                                    @item.Product.Price100.ToString("c")
+                                </span>
+                            </p>
+                        </div>
+                        <a asp-action="Details" asp-route-productId="@item.Product.Id" class="btn btn-primary bg-gradient border-0 w-100 mt-auto">
+                            Details
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
 
 <div class="container py-5">
     <div class="row text-center">
